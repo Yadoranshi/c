@@ -2,10 +2,10 @@
 
 int main()
 {
-    int a = 10;
-    int b = 20;
+    int a = 20;
+    int b = 3;
     int c = a - b;
-    printf("%d %d\n", a, b);
-    printf("%d\n", a+b);
-    printf("%d", c);
+    printf("a: %d b: %d c: %d\n", a, b, c);
+    printf("a+b %d\n", a+b);
+    printf("a/b: %d\n", a/b);
 }
