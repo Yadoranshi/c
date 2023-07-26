@@ -10,7 +10,7 @@ typedef struct Queue
     int rear;
 }Queue;
 
-Queue* get_new_queue(int max_size = 10000)
+Queue* get_new_queue(unsigned int max_size = 10000)
 {
     Queue* new_q = (Queue*)malloc(sizeof(Queue));
     new_q->front = 0;
@@ -23,7 +23,7 @@ Queue* get_new_queue(int max_size = 10000)
 
 bool is_full(Queue* q)
 {
-    return q->size == q->max_size;
+    return q->rear >= q->max_size - 1;
 }
 
 bool is_empty(Queue* q)
@@ -87,5 +87,5 @@ int main()
     Queue* q = get_new_queue();
     push(q, 1);
     push(q, 2);
-    
+
 }
