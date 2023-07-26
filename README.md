@@ -1,2 +1,2 @@
-# cpp
-cpp_for_beginner
+# c/cpp
+c/cpp_for_beginner
