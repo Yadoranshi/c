@@ -2,11 +2,9 @@
 
 int main()
 {
-    int numinput;
-	char charinput;
-	scanf("%d", &numinput);
-	printf("%d\n", numinput);
-    getchar();
-	scanf("%c" ,&charinput);
-	printf("%c", charinput);
+	char ch1, ch2, ch3;
+	ch1 = getchar();
+	ch2 = getchar();
+	ch3 = getchar();
+	printf("%c %c %c", ch1, ch2, ch3);
 }
