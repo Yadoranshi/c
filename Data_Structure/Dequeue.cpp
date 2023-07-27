@@ -1,3 +1,5 @@
+// uncertain
+
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -12,98 +14,129 @@ typedef struct Dequeue
 
 Dequeue* get_new_dequeue(unsigned int max_size = 10000)
 {
-    Dequeue* new_q = (Dequeue*)malloc(sizeof(Dequeue));
-    new_q->size = 0;
-    new_q->max_size = max_size;
-    new_q->front = 0;
-    new_q->rear = 0;
-    new_q->arr = (int*)malloc(sizeof(int)*max_size);
+    Dequeue* new_dq = (Dequeue*)malloc(sizeof(Dequeue));
+    new_dq->size = 0;
+    new_dq->max_size = max_size;
+    new_dq->front = 0;
+    new_dq->rear = 0;
+    new_dq->arr = (int*)malloc(sizeof(int)*max_size);
 
-    return new_q;
+    return new_dq;
 }
 
-bool is_empty(Dequeue* q)
+bool is_empty(Dequeue* dq)
 {
-    return q->size == 0;
+    return dq->size == 0;
 }
 
-bool is_full(Dequeue* q)
+bool is_full(Dequeue* dq)
 {
-    return q->size >= q->max_size;
+    return dq->size >= dq->max_size;
 }
 
-void push(Dequeue* q, int data)
+void push_front(Dequeue* dq, int data)
 {
-    if(is_full(q))
+    if(is_full(dq))
     {
-        puts("Error:: in push(): queue is full");
+        puts("Error:: in push_front(): dequeue is full");
         exit(-1);
     }
 
-    if(is_empty(q))
+    if(is_empty(dq))
     {
-        q->arr[q->rear] = data;
-        q->size++;
+        dq->arr[dq->rear] = data;
+        dq->size++;
         return;
     }
 
-    if(q->rear == q->max_size - 1)
+    if(dq->front == 0)
     {
-        q->rear = 0;
-        q->arr[q->rear] = data;
-        q->size++;
+        dq->front = dq->max_size - 1;
+        dq->arr[dq->rear] = data;
+        dq->size++;
         return;
     }
 
-    q->arr[++(q->rear)] = data;
-    q->size++;
+    dq->arr[--(dq->front)] = data;
+    dq->size++;
+}
+void push_back(Dequeue* dq, int data)
+{
+    if(is_full(dq))
+    {
+        puts("Error:: in push_back(): dequeue is full");
+        exit(-1);
+    }
+
+    if(is_empty(dq))
+    {
+        dq->arr[dq->rear] = data;
+        dq->size++;
+        return;
+    }
+
+    if(dq->rear == dq->max_size - 1)
+    {
+        dq->rear = 0;
+        dq->arr[dq->rear] = data;
+        dq->size++;
+        return;
+    }
+
+    dq->arr[++(dq->rear)] = data;
+    dq->size++;
 }
 
-void pop_front(Dequeue* q)
+
+void pop_front(Dequeue* dq)
 {
-    if(is_empty(q))
+    if(is_empty(dq))
     {
         puts("Error:: in push(): queue is empty");
         exit(-1);
     }
-    if(q->front >= q->max_size - 1)
+    if(dq->front >= dq->max_size - 1)
     {
-        q->front = 0;
-        q->size--;
+        dq->front = 0;
+        dq->size--;
         return;
     }
-    q->front++;
-    q->size--;
+    dq->front++;
+    dq->size--;
 }
 
-void pop_back(Dequeue* q)
+void pop_back(Dequeue* dq)
 {
-    if(is_empty(q))
+    if(is_empty(dq))
     {
         puts("Error:: in pop_back(): queue is empty");
         exit(-1);
     }
-    if(q->rear >= q->max_size - 1)
+    if(dq->rear >= dq->max_size - 1)
     {
-        q->rear = 0;
-        q->size--;
+        dq->rear = 0;
+        dq->size--;
         return;
     }
-    q->rear--;
-    q->size--;
+    dq->rear--;
+    dq->size--;
 }
 
-int front(Dequeue* q)
+int front(Dequeue* dq)
 {
-    return q->arr[q->front];
+    return dq->arr[dq->front];
 }
-int back(Dequeue* q)
+int back(Dequeue* dq)
 {
-    return q->arr[q->rear];
+    return dq->arr[dq->rear];
 }
 
 int main()
 {
     //!!!!
-    printf("%d", front(q));
+    Dequeue* dq = get_new_dequeue();
+    push_back(dq, 10);
+    push_back(dq, 20);
+    push_front(dq, 0);
+    printf("%d", front(dq));
 }
